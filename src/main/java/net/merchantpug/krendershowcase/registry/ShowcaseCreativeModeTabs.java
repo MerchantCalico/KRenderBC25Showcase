@@ -16,7 +16,7 @@ public class ShowcaseCreativeModeTabs {
                         output.accept(ShowcaseItems.CHARACTER);
                         output.accept(ShowcaseItems.DISCO_FOOR);
                     })
-                    .icon(() -> new ItemStack(ShowcaseItems.DISCO_FOOR))
+                    .icon(() -> new ItemStack(ShowcaseItems.CHARACTER))
                     .build()
     );
 
