@@ -15,14 +15,12 @@ import net.merchantpug.krendershowcase.client.model.DiscoFloorUnbakedModel;
 import net.merchantpug.krendershowcase.data.CharacterData;
 import net.merchantpug.krendershowcase.registry.ShowcaseBlocks;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
@@ -37,7 +35,7 @@ public class KRenderShowcaseClient implements ClientModInitializer {
 		});
 
 		ModelBakeryPlugin.registerPreparable((resourceManager, executor) -> CompletableFuture.supplyAsync(() -> {
-			Map<ResourceKey<CharacterData>, List<CharacterModelData<ResourceLocation>>> models = new Object2ObjectLinkedOpenHashMap<>();
+			Map<ResourceKey<CharacterData>, CharacterModelData<ResourceLocation>> models = new Object2ObjectLinkedOpenHashMap<>();
 
 			ModelGuards guards = ModelGuards.load(resourceManager);
 			Map<ResourceLocation, Resource> resources = guards.getModels(resourceManager, LOADER_ID, ".json");

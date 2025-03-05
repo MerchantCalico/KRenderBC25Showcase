@@ -1,9 +1,7 @@
 {
   "character": "krendershowcase:ava",
-  "models": [
-    {
-      "top": "krendershowcase:block/ava_top",
-      "bottom": "krendershowcase:block/ava_bottom"
-    }
-  ]
+  "models": {
+    "top": "krendershowcase:block/ava_top",
+    "bottom": "krendershowcase:block/ava_bottom"
+  }
 }
