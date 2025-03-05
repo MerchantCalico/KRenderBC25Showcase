@@ -1,7 +1,8 @@
-package net.merchantpug.krendershowcase.client.model;
+package net.merchantpug.krendershowcase.client.model.unbaked;
 
 import com.kneelawk.krender.engine.api.KRenderer;
 import net.merchantpug.krendershowcase.KRenderShowcase;
+import net.merchantpug.krendershowcase.client.model.baked.DiscoFloorBakedModel;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.*;

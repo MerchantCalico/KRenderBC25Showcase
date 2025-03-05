@@ -1,10 +1,11 @@
-package net.merchantpug.krendershowcase.client.model;
+package net.merchantpug.krendershowcase.client.model.baked;
 
 import com.kneelawk.krender.engine.api.buffer.QuadEmitter;
 import com.kneelawk.krender.engine.api.model.*;
 import com.mojang.datafixers.util.Pair;
 import net.merchantpug.krendershowcase.block.CharacterBlock;
 import net.merchantpug.krendershowcase.block.entity.CharacterBlockEntity;
+import net.merchantpug.krendershowcase.client.model.CharacterModelData;
 import net.merchantpug.krendershowcase.data.CharacterData;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ItemOverrides;

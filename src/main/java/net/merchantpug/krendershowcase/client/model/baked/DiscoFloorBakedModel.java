@@ -1,4 +1,4 @@
-package net.merchantpug.krendershowcase.client.model;
+package net.merchantpug.krendershowcase.client.model.baked;
 
 import com.kneelawk.krender.engine.api.KRenderer;
 import com.kneelawk.krender.engine.api.TriState;

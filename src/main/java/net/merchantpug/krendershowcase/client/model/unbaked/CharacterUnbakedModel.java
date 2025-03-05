@@ -1,4 +1,4 @@
-package net.merchantpug.krendershowcase.client.model;
+package net.merchantpug.krendershowcase.client.model.unbaked;
 
 import com.kneelawk.krender.engine.api.KRenderer;
 import com.kneelawk.krender.engine.api.model.BakedModelCore;
@@ -7,6 +7,8 @@ import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.merchantpug.krendershowcase.KRenderShowcase;
+import net.merchantpug.krendershowcase.client.model.CharacterModelData;
+import net.merchantpug.krendershowcase.client.model.baked.CharacterBakedModel;
 import net.merchantpug.krendershowcase.data.CharacterData;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.*;
