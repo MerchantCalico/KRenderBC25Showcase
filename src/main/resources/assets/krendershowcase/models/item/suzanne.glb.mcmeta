@@ -1,0 +1,11 @@
+{
+    "krender:gltf": {
+        "translation": [ 0.5, 0.5, 0.5 ],
+        "rotation": [ -30, 130, 0 ],
+        "scale": 0.75,
+        "materialOverride": {
+            "emissive": true
+        },
+        "useAmbientOcclusion": false
+    }
+}

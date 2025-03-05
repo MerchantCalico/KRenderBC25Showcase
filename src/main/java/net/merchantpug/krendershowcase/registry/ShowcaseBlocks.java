@@ -2,6 +2,7 @@ package net.merchantpug.krendershowcase.registry;
 
 import net.merchantpug.krendershowcase.KRenderShowcase;
 import net.merchantpug.krendershowcase.block.CharacterBlock;
+import net.merchantpug.krendershowcase.block.ShowcaseBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -20,6 +21,12 @@ public class ShowcaseBlocks {
     public static final Block DISCO_FLOOR = Registry.register(BuiltInRegistries.BLOCK, KRenderShowcase.asResource("disco_floor"),
             new Block(BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.DRAGON).strength(0.3F).sound(SoundType.GLASS)
                     .isValidSpawn(ShowcaseBlocks::never).isSuffocating(ShowcaseBlocks::never)));
+    public static final Block SMALL_SUZANNE = Registry.register(BuiltInRegistries.BLOCK, KRenderShowcase.asResource("small_suzanne"),
+            new ShowcaseBlock(BlockBehaviour.Properties.of().noOcclusion()));
+    public static final Block SUZANNE = Registry.register(BuiltInRegistries.BLOCK, KRenderShowcase.asResource("suzanne"),
+            new ShowcaseBlock(BlockBehaviour.Properties.of().noOcclusion()));
+    public static final Block LARGE_SUZANNE = Registry.register(BuiltInRegistries.BLOCK, KRenderShowcase.asResource("large_suzanne"),
+            new ShowcaseBlock(BlockBehaviour.Properties.of().noOcclusion()));
 
     public static void registerAll() {}
 

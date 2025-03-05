@@ -1,0 +1,17 @@
+{
+    "krender:gltf": {
+        "translation": [ 0.5, 0.5, 0.5 ],
+        "scale": 1.5,
+        "materialOverride": {
+            "blendMode": "translucent",
+            "emissive": true,
+            "colorFactor": [
+                1.0,
+                0.0,
+                1.0,
+                0.6
+            ]
+        },
+        "useAmbientOcclusion": false
+    }
+}

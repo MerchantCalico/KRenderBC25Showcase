@@ -2,6 +2,18 @@
   "guards": [
     {
       "type": "krender:directory",
+      "loader": "krender:gltf",
+      "directory": "krendershowcase:models/block",
+      "prefix": "block/"
+    },
+    {
+      "type": "krender:directory",
+      "loader": "krender:gltf",
+      "directory": "krendershowcase:models/item",
+      "prefix": "item/"
+    },
+    {
+      "type": "krender:directory",
       "loader": "krendershowcase:character",
       "directory": "krendershowcase:models/character",
       "prefix": "character/"

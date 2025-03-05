@@ -13,6 +13,9 @@ base {
 }
 
 repositories {
+	maven("https://maven.parchmentmc.org") {
+		name = "ParchmentMC"
+	}
 	maven("https://maven.kneelawk.com/releases") {
 		name = "Kneelawk's Maven"
 	}
@@ -39,6 +42,8 @@ dependencies {
 	include("com.kneelawk.krender:krender-model-loading-fabric:${Versions.KRENDER}")
 	modImplementation("com.kneelawk.krender:krender-model-guard-fabric:${Versions.KRENDER}")
 	include("com.kneelawk.krender:krender-model-guard-fabric:${Versions.KRENDER}")
+	modImplementation("com.kneelawk.krender:krender-model-gltf-fabric:${Versions.KRENDER}")
+	include("com.kneelawk.krender:krender-model-gltf-fabric:${Versions.KRENDER}")
 }
 
 tasks {

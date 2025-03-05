@@ -15,6 +15,9 @@ public class ShowcaseCreativeModeTabs {
                     .displayItems((params, output) -> {
                         output.accept(ShowcaseItems.CHARACTER);
                         output.accept(ShowcaseItems.DISCO_FOOR);
+                        output.accept(ShowcaseItems.SMALL_SUZANNE);
+                        output.accept(ShowcaseItems.SUZANNE);
+                        output.accept(ShowcaseItems.LARGE_SUZANNE);
                     })
                     .icon(() -> new ItemStack(ShowcaseItems.CHARACTER))
                     .build()

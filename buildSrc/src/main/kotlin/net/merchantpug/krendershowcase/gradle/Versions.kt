@@ -12,7 +12,7 @@ object Versions {
     const val FABRIC_LOADER_RANGE = ">=0.16"
     const val FABRIC_MINECRAFT_RANGE = ">=1.21 <=1.21.1"
 
-    const val KRENDER = "0.1.1+1.21.1"
+    const val KRENDER = "0.1.2+1.21.1"
 
     const val JAVA = 21
 }

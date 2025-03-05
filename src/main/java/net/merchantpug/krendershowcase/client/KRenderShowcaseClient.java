@@ -25,7 +25,7 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 public class KRenderShowcaseClient implements ClientModInitializer {
-	public static final ResourceLocation LOADER_ID = KRenderShowcase.asResource("character");
+	public static final ResourceLocation CHARACTER_LOADER_ID = KRenderShowcase.asResource("character");
 
 	@Override
 	public void onInitializeClient() {
@@ -38,7 +38,7 @@ public class KRenderShowcaseClient implements ClientModInitializer {
 			Map<ResourceKey<CharacterData>, CharacterModelData<ResourceLocation>> models = new Object2ObjectLinkedOpenHashMap<>();
 
 			ModelGuards guards = ModelGuards.load(resourceManager);
-			Map<ResourceLocation, Resource> resources = guards.getModels(resourceManager, LOADER_ID, ".json");
+			Map<ResourceLocation, Resource> resources = guards.getModels(resourceManager, CHARACTER_LOADER_ID, ".json");
 
 			for (Map.Entry<ResourceLocation, Resource> resource : resources.entrySet()) {
 				try (BufferedReader reader = resource.getValue().openAsReader()) {
@@ -46,7 +46,7 @@ public class KRenderShowcaseClient implements ClientModInitializer {
 					var pair = CharacterUnbakedModel.FILE_CODEC.decode(JsonOps.INSTANCE, json).getOrThrow().getFirst();
 					models.put(pair.getFirst(), pair.getSecond());
 				} catch (IOException ex) {
-					KRenderShowcase.LOGGER.warn("Failed to load character model '{}' found in pack '{}'", resource.getKey(), resource.getValue().sourcePackId(), ex);
+					KRenderShowcase.LOG.warn("Failed to load character model '{}' found in pack '{}'", resource.getKey(), resource.getValue().sourcePackId(), ex);
 				}
 			}
 
@@ -55,5 +55,6 @@ public class KRenderShowcaseClient implements ClientModInitializer {
 				context.addLowLevelModel(KRenderShowcase.asResource("block/character"), map));
 
 		BlockRenderLayerMap.INSTANCE.putBlock(ShowcaseBlocks.CHARACTER, RenderType.cutout());
+		BlockRenderLayerMap.INSTANCE.putBlock(ShowcaseBlocks.SUZANNE, RenderType.cutout());
 	}
 }

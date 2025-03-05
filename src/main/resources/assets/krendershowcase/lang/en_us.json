@@ -1,6 +1,9 @@
 {
   "block.krendershowcase.character": "Character",
   "block.krendershowcase.disco_floor": "Disco Floor",
+  "block.krendershowcase.small_suzanne": "Small Suzanne",
+  "block.krendershowcase.suzanne": "Suzanne",
+  "block.krendershowcase.large_suzanne": "Large Suzanne",
 
   "itemGroup.krendershowcase.main": "KRender BlanketCon '25 Showcase"
 }

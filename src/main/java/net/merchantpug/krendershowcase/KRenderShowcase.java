@@ -2,9 +2,7 @@ package net.merchantpug.krendershowcase;
 
 import net.fabricmc.api.ModInitializer;
 
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
-import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;
 import net.merchantpug.krendershowcase.data.CharacterData;
 import net.merchantpug.krendershowcase.registry.ShowcaseBlockEntityTypes;
 import net.merchantpug.krendershowcase.registry.ShowcaseBlocks;
@@ -18,7 +16,7 @@ import org.slf4j.LoggerFactory;
 
 public class KRenderShowcase implements ModInitializer {
 	public static final String MOD_ID = "krendershowcase";
-	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+	public static final Logger LOG = LoggerFactory.getLogger(MOD_ID);
 
 	public static final ResourceKey<Registry<CharacterData>> CHARACTER = ResourceKey.createRegistryKey(asResource("character"));
 
