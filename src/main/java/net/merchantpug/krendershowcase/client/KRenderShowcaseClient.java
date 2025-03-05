@@ -10,6 +10,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.merchantpug.krendershowcase.KRenderShowcase;
 import net.merchantpug.krendershowcase.client.model.CharacterModelData;
+import net.merchantpug.krendershowcase.client.model.unbaked.MiniBlockUnbakedModel;
 import net.merchantpug.krendershowcase.client.model.unbaked.CharacterUnbakedModel;
 import net.merchantpug.krendershowcase.client.model.unbaked.DiscoFloorUnbakedModel;
 import net.merchantpug.krendershowcase.data.CharacterData;
@@ -32,6 +33,7 @@ public class KRenderShowcaseClient implements ClientModInitializer {
 		ModelBakeryPlugin.register(ctx -> {
 			ctx.addLowLevelModel(KRenderShowcase.asResource("block/disco_floor"), new DiscoFloorUnbakedModel());
 			ctx.addLowLevelModel(KRenderShowcase.asResource("item/disco_floor"), new DiscoFloorUnbakedModel());
+			ctx.addLowLevelModel(KRenderShowcase.asResource("item/mini_block"), new MiniBlockUnbakedModel());
 		});
 
 		ModelBakeryPlugin.registerPreparable((resourceManager, executor) -> CompletableFuture.supplyAsync(() -> {

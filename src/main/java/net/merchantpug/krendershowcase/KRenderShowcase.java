@@ -4,10 +4,7 @@ import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
 import net.merchantpug.krendershowcase.data.CharacterData;
-import net.merchantpug.krendershowcase.registry.ShowcaseBlockEntityTypes;
-import net.merchantpug.krendershowcase.registry.ShowcaseBlocks;
-import net.merchantpug.krendershowcase.registry.ShowcaseCreativeModeTabs;
-import net.merchantpug.krendershowcase.registry.ShowcaseItems;
+import net.merchantpug.krendershowcase.registry.*;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -24,6 +21,7 @@ public class KRenderShowcase implements ModInitializer {
 	public void onInitialize() {
 		ShowcaseBlocks.registerAll();
 		ShowcaseBlockEntityTypes.registerAll();
+		ShowcaseDataComponents.registerAll();
 		ShowcaseItems.registerAll();
 		ShowcaseCreativeModeTabs.registerAll();
 

@@ -5,5 +5,8 @@
   "block.krendershowcase.suzanne": "Suzanne",
   "block.krendershowcase.large_suzanne": "Large Suzanne",
 
+  "item.krendershowcase.mini_block": "Mini Block",
+  "item.krendershowcase.mini_block.tooltip": "Usable on a full-sized block to swap the texture",
+
   "itemGroup.krendershowcase.main": "KRender BlanketCon '25 Showcase"
 }

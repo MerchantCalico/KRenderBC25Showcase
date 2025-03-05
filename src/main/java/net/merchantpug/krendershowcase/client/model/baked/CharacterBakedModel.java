@@ -3,6 +3,7 @@ package net.merchantpug.krendershowcase.client.model.baked;
 import com.kneelawk.krender.engine.api.buffer.QuadEmitter;
 import com.kneelawk.krender.engine.api.model.*;
 import com.mojang.datafixers.util.Pair;
+import net.merchantpug.krendershowcase.KRenderShowcase;
 import net.merchantpug.krendershowcase.block.CharacterBlock;
 import net.merchantpug.krendershowcase.block.entity.CharacterBlockEntity;
 import net.merchantpug.krendershowcase.client.model.CharacterModelData;
@@ -13,7 +14,6 @@ import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.UnknownNullability;
@@ -21,7 +21,6 @@ import org.jetbrains.annotations.UnknownNullability;
 import java.util.Map;
 
 public record CharacterBakedModel(Map<ResourceKey<CharacterData>, CharacterModelData<BakedModelCore<Object>>> models) implements BakedModelCore<Pair<BakedModelCore<Object>, Object>> {
-
     @Override
     public boolean useAmbientOcclusion() {
         return false;
@@ -44,7 +43,7 @@ public record CharacterBakedModel(Map<ResourceKey<CharacterData>, CharacterModel
 
     @Override
     public TextureAtlasSprite getParticleIcon() {
-        return Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(ResourceLocation.withDefaultNamespace("block/oak_planks"));
+        return Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(KRenderShowcase.asResource("item/character"));
     }
 
     @Override
