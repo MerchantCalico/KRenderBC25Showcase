@@ -7,11 +7,14 @@ import com.kneelawk.krender.model.loading.api.ModelBakeryPlugin;
 import com.mojang.serialization.JsonOps;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.merchantpug.krendershowcase.KRenderShowcase;
 import net.merchantpug.krendershowcase.client.model.CharacterModelData;
 import net.merchantpug.krendershowcase.client.model.CharacterUnbakedModel;
 import net.merchantpug.krendershowcase.client.model.DiscoFloorUnbakedModel;
 import net.merchantpug.krendershowcase.data.CharacterData;
+import net.merchantpug.krendershowcase.registry.ShowcaseBlocks;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -52,5 +55,7 @@ public class KRenderShowcaseClient implements ClientModInitializer {
 			return new CharacterUnbakedModel(models);
 		}), (map, context) ->
 				context.addLowLevelModel(KRenderShowcase.asResource("block/character"), map));
+
+		BlockRenderLayerMap.INSTANCE.putBlock(ShowcaseBlocks.CHARACTER, RenderType.cutout());
 	}
 }

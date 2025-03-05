@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 
 public class ShowcaseBlocks {
     public static final Block CHARACTER = Registry.register(BuiltInRegistries.BLOCK, KRenderShowcase.asResource("character"),
-            new CharacterBlock(BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASS).strength(0.2F).sound(SoundType.WOOD)
+            new CharacterBlock(BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASS).strength(0.3F).sound(SoundType.WOOD)
                     .isValidSpawn(ShowcaseBlocks::never).isSuffocating(ShowcaseBlocks::never)));
     public static final Block DISCO_FLOOR = Registry.register(BuiltInRegistries.BLOCK, KRenderShowcase.asResource("disco_floor"),
             new Block(BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.DRAGON).strength(0.3F).sound(SoundType.GLASS)

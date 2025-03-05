@@ -29,16 +29,22 @@ public class CharacterBlockEntity extends BlockEntity {
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, CharacterBlockEntity blockEntity) {
-        if (blockEntity.data == null || level.getGameTime() % 80 == 0) {
-            blockEntity.data = level.registryAccess().registry(KRenderShowcase.CHARACTER).orElseThrow().getRandom(level.random).orElseThrow();
-            blockEntity.setChanged();
-            level.sendBlockUpdated(pos, state, state, Block.UPDATE_ALL);
+        if (blockEntity.data == null || level.getGameTime() % 120 == 0) {
+            var newData = level.registryAccess().registry(KRenderShowcase.CHARACTER).orElseThrow().getRandom(level.random).orElseThrow();
+            if (newData != blockEntity.data) {
+                blockEntity.data = newData;
+                blockEntity.setChanged();
+                level.sendBlockUpdated(pos, state, state, Block.UPDATE_CLIENTS);
+            }
         }
     }
 
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         if (tag.contains("data"))
             data = CharacterData.CODEC.decode(registries.createSerializationContext(NbtOps.INSTANCE), tag.get("data")).getOrThrow().getFirst();
+
+        if (hasLevel())
+            getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), Block.UPDATE_CLIENTS);
     }
 
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {

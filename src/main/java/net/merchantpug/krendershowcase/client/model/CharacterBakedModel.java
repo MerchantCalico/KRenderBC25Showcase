@@ -48,7 +48,7 @@ public record CharacterBakedModel(Map<ResourceKey<CharacterData>, List<Character
 
     @Override
     public TextureAtlasSprite getParticleIcon() {
-        return Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(ResourceLocation.withDefaultNamespace("block/stone"));
+        return Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(ResourceLocation.withDefaultNamespace("block/oak_planks"));
     }
 
     @Override

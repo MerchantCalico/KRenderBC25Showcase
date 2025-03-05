@@ -5,6 +5,8 @@ import net.merchantpug.krendershowcase.block.entity.CharacterBlockEntity;
 import net.merchantpug.krendershowcase.registry.ShowcaseBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -50,10 +52,15 @@ public class CharacterBlock extends BaseEntityBlock {
         return Z_AABB;
     }
 
+    @Override
+    public void setPlacedBy(Level level, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
+        level.setBlock(pos.above(), state.setValue(HALF, DoubleBlockHalf.UPPER), 3);
+    }
+
     protected BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
         DoubleBlockHalf doubleBlockHalf = state.getValue(HALF);
         if (direction.getAxis() == Direction.Axis.Y && doubleBlockHalf == DoubleBlockHalf.LOWER == (direction == Direction.UP)) {
-            return neighborState.getBlock() instanceof DoorBlock && neighborState.getValue(HALF) != doubleBlockHalf ? neighborState.setValue(HALF, doubleBlockHalf) : Blocks.AIR.defaultBlockState();
+            return neighborState.getBlock() instanceof CharacterBlock && neighborState.getValue(HALF) != doubleBlockHalf ? neighborState.setValue(HALF, doubleBlockHalf) : Blocks.AIR.defaultBlockState();
         }
         return doubleBlockHalf == DoubleBlockHalf.LOWER && direction == Direction.DOWN && !state.canSurvive(level, pos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, neighborState, level, pos, neighborPos);
     }

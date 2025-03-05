@@ -8,8 +8,8 @@
 			"to": [16, 16, 8],
 			"rotation": {"angle": 0, "axis": "y", "origin": [0, 0, 8]},
 			"faces": {
-				"north": {"uv": [16, 16, 32, 32], "texture": "#sprite"},
-				"south": {"uv": [16, 16, 32, 32], "texture": "#sprite"}
+				"north": {"uv": [0, 8, 16, 16], "texture": "#sprite"},
+				"south": {"uv": [0, 8, 16, 16], "texture": "#sprite"}
 			}
 		}
 	]
