@@ -1,0 +1,70 @@
+package net.merchantpug.krendershowcase.client.model;
+
+import com.kneelawk.krender.engine.api.KRenderer;
+import com.kneelawk.krender.engine.api.model.BakedModelCore;
+import com.mojang.datafixers.util.Pair;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.merchantpug.krendershowcase.KRenderShowcase;
+import net.merchantpug.krendershowcase.data.CharacterData;
+import net.minecraft.client.renderer.block.model.Variant;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.resources.model.*;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public record CharacterUnbakedModel(Map<ResourceKey<CharacterData>, List<CharacterModelData<ResourceLocation>>> models) implements UnbakedModel {
+    private static final Codec<CharacterModelData<ResourceLocation>> MODEL_CODEC = RecordCodecBuilder.create(inst -> inst.group(
+            ResourceLocation.CODEC.fieldOf("top").forGetter(CharacterModelData::top),
+            ResourceLocation.CODEC.fieldOf("bottom").forGetter(CharacterModelData::bottom)
+    ).apply(inst, CharacterModelData::new));
+    public static final Codec<Pair<ResourceKey<CharacterData>, List<CharacterModelData<ResourceLocation>>>> FILE_CODEC = RecordCodecBuilder.create(inst -> inst.group(
+            ResourceKey.codec(KRenderShowcase.CHARACTER).fieldOf("character").forGetter(Pair::getFirst),
+            MODEL_CODEC.listOf().fieldOf("models").forGetter(Pair::getSecond)
+    ).apply(inst, Pair::of));
+
+    @Override
+    public Collection<ResourceLocation> getDependencies() {
+        return models.values().stream().flatMap(list -> list.stream().flatMap(data -> Stream.of(data.top(), data.bottom()))).toList();
+    }
+
+    @Override
+    public void resolveParents(Function<ResourceLocation, UnbakedModel> resolver) {
+        getDependencies().forEach(resolver::apply);
+    }
+
+    @Override
+    public BakedModel bake(ModelBaker baker, Function<Material, TextureAtlasSprite> spriteGetter, ModelState state) {
+        return KRenderer.getDefault().bakedModelFactory()
+                .wrap(new CharacterBakedModel(models.entrySet().stream().map(entry -> {
+                    List<CharacterModelData<BakedModel>> bakedModels = entry.getValue().stream()
+                            .map(data -> new CharacterModelData<>(
+                                    bakeModelWithDependencies(
+                                            baker.getModel(data.top()),
+                                            baker,
+                                            spriteGetter,
+                                            state
+                                    ),
+                                    bakeModelWithDependencies(
+                                            baker.getModel(data.bottom()),
+                                            baker,
+                                            spriteGetter,
+                                            state
+                                    )
+                            )).toList();
+                    return Pair.of(entry.getKey(), bakedModels);
+                }).collect(Collectors.toMap(Pair::getFirst, Pair::getSecond))));
+    }
+
+    private static BakedModel bakeModelWithDependencies(UnbakedModel model, ModelBaker baker, Function<Material, TextureAtlasSprite> spriteGetter, ModelState state) {
+        model.resolveParents(baker::getModel);
+        return model.bake(baker, spriteGetter, state);
+    }
+}

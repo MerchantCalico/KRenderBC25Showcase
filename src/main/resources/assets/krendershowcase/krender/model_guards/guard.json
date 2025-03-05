@@ -1,0 +1,10 @@
+{
+  "guards": [
+    {
+      "type": "krender:directory",
+      "loader": "krendershowcase:character",
+      "directory": "krendershowcase:models/character",
+      "prefix": "character/"
+    }
+  ]
+}

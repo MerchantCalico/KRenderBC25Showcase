@@ -1,0 +1,56 @@
+package net.merchantpug.krendershowcase.client;
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.kneelawk.krender.model.guard.api.ModelGuards;
+import com.kneelawk.krender.model.loading.api.ModelBakeryPlugin;
+import com.mojang.serialization.JsonOps;
+import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
+import net.fabricmc.api.ClientModInitializer;
+import net.merchantpug.krendershowcase.KRenderShowcase;
+import net.merchantpug.krendershowcase.client.model.CharacterModelData;
+import net.merchantpug.krendershowcase.client.model.CharacterUnbakedModel;
+import net.merchantpug.krendershowcase.client.model.DiscoFloorUnbakedModel;
+import net.merchantpug.krendershowcase.data.CharacterData;
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.Resource;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+
+public class KRenderShowcaseClient implements ClientModInitializer {
+	public static final ResourceLocation LOADER_ID = KRenderShowcase.asResource("character");
+
+	@Override
+	public void onInitializeClient() {
+		ModelBakeryPlugin.register(ctx -> {
+			ctx.addLowLevelModel(KRenderShowcase.asResource("block/disco_floor"), new DiscoFloorUnbakedModel());
+			ctx.addLowLevelModel(KRenderShowcase.asResource("item/disco_floor"), new DiscoFloorUnbakedModel());
+		});
+
+		ModelBakeryPlugin.registerPreparable((resourceManager, executor) -> CompletableFuture.supplyAsync(() -> {
+			Map<ResourceKey<CharacterData>, List<CharacterModelData<ResourceLocation>>> models = new Object2ObjectLinkedOpenHashMap<>();
+
+			ModelGuards guards = ModelGuards.load(resourceManager);
+			Map<ResourceLocation, Resource> resources = guards.getModels(resourceManager, LOADER_ID, ".json");
+
+			for (Map.Entry<ResourceLocation, Resource> resource : resources.entrySet()) {
+				try (BufferedReader reader = resource.getValue().openAsReader()) {
+					JsonElement json = JsonParser.parseReader(reader);
+					var pair = CharacterUnbakedModel.FILE_CODEC.decode(JsonOps.INSTANCE, json).getOrThrow().getFirst();
+					models.put(pair.getFirst(), pair.getSecond());
+				} catch (IOException ex) {
+					KRenderShowcase.LOGGER.warn("Failed to load character model '{}' found in pack '{}'", resource.getKey(), resource.getValue().sourcePackId(), ex);
+				}
+			}
+
+			return new CharacterUnbakedModel(models);
+		}), (map, context) ->
+				context.addLowLevelModel(KRenderShowcase.asResource("block/character"), map));
+	}
+}
