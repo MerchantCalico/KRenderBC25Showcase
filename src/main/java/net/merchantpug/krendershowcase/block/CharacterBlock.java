@@ -1,8 +1,10 @@
 package net.merchantpug.krendershowcase.block;
 
 import com.mojang.serialization.MapCodec;
+import it.unimi.dsi.fastutil.doubles.DoubleBigList;
 import net.merchantpug.krendershowcase.block.entity.CharacterBlockEntity;
 import net.merchantpug.krendershowcase.registry.ShowcaseBlockEntityTypes;
+import net.merchantpug.krendershowcase.registry.ShowcaseBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.LivingEntity;
@@ -11,6 +13,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -57,6 +60,14 @@ public class CharacterBlock extends BaseEntityBlock {
         level.setBlock(pos.above(), state.setValue(HALF, DoubleBlockHalf.UPPER), 3);
     }
 
+    @Override
+    protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+        DoubleBlockHalf half = state.getValue(HALF) == DoubleBlockHalf.LOWER ? DoubleBlockHalf.UPPER : DoubleBlockHalf.LOWER;
+        BlockState otherState = half == DoubleBlockHalf.UPPER ? level.getBlockState(pos.above()) : level.getBlockState(pos.below());
+        return level.getBlockState(pos) != state || otherState.is(ShowcaseBlocks.CHARACTER) && otherState.getValue(HALF) == half;
+    }
+
+    @Override
     protected BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
         DoubleBlockHalf doubleBlockHalf = state.getValue(HALF);
         if (direction.getAxis() == Direction.Axis.Y && doubleBlockHalf == DoubleBlockHalf.LOWER == (direction == Direction.UP)) {

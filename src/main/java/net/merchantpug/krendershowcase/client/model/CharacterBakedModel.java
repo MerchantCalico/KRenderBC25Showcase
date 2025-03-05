@@ -63,6 +63,8 @@ public record CharacterBakedModel(Map<ResourceKey<CharacterData>, CharacterModel
             if (characterBlockEntity.getCharacterData() == null)
                 return null;
             var data = models.get(characterBlockEntity.getCharacterData().unwrapKey().orElseThrow());
+            if (data == null)
+                return null;
             if (modelBlockContext.state().getValue(CharacterBlock.HALF) == DoubleBlockHalf.UPPER)
                 return Pair.of(data.top(), data.top().getBlockKey(modelBlockContext));
             return Pair.of(data.bottom(), data.bottom().getBlockKey(modelBlockContext));

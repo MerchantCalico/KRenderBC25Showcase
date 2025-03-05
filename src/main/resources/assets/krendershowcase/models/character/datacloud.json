@@ -1,0 +1,7 @@
+{
+  "character": "krendershowcase:datacloud",
+  "models": {
+    "top": "krendershowcase:block/datacloud_top",
+    "bottom": "krendershowcase:block/datacloud_bottom"
+  }
+}

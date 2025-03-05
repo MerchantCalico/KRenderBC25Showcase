@@ -1,6 +1,7 @@
 package net.merchantpug.krendershowcase.block.entity;
 
 import net.merchantpug.krendershowcase.KRenderShowcase;
+import net.merchantpug.krendershowcase.block.CharacterBlock;
 import net.merchantpug.krendershowcase.data.CharacterData;
 import net.merchantpug.krendershowcase.registry.ShowcaseBlockEntityTypes;
 import net.minecraft.core.BlockPos;
@@ -15,6 +16,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import org.jetbrains.annotations.Nullable;
 
 public class CharacterBlockEntity extends BlockEntity {
@@ -29,22 +31,28 @@ public class CharacterBlockEntity extends BlockEntity {
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, CharacterBlockEntity blockEntity) {
-        if (blockEntity.data == null || level.getGameTime() % 120 == 0) {
-            var newData = level.registryAccess().registry(KRenderShowcase.CHARACTER).orElseThrow().getRandom(level.random).orElseThrow();
+        if (state.getValue(CharacterBlock.HALF) == DoubleBlockHalf.LOWER && (blockEntity.data == null || level.getGameTime() % 120 == 0)) {
+            var validData = level.registryAccess().registry(KRenderShowcase.CHARACTER).orElseThrow().holders().filter(characterData -> characterData != blockEntity.data).toList();
+            var newData = validData.get(level.getRandom().nextInt(validData.size()));
             if (newData != blockEntity.data) {
-                blockEntity.data = newData;
-                blockEntity.setChanged();
-                level.sendBlockUpdated(pos, state, state, Block.UPDATE_CLIENTS);
+                blockEntity.updateCharacterData(newData);
+                var otherBlockEntity = level.getBlockEntity(state.getValue(CharacterBlock.HALF) == DoubleBlockHalf.LOWER ? pos.above() : pos.below(), ShowcaseBlockEntityTypes.CHARACTER);
+                otherBlockEntity.ifPresent(be -> be.updateCharacterData(newData));
             }
+        }
+    }
+
+    private void updateCharacterData(Holder<CharacterData> newData) {
+        data = newData;
+        if (hasLevel()) {
+            setChanged();
+            getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), Block.UPDATE_CLIENTS);
         }
     }
 
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         if (tag.contains("data"))
-            data = CharacterData.CODEC.decode(registries.createSerializationContext(NbtOps.INSTANCE), tag.get("data")).getOrThrow().getFirst();
-
-        if (hasLevel())
-            getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), Block.UPDATE_CLIENTS);
+            updateCharacterData(CharacterData.CODEC.decode(registries.createSerializationContext(NbtOps.INSTANCE), tag.get("data")).getOrThrow().getFirst());
     }
 
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
