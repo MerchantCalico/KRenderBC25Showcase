@@ -1,5 +1,7 @@
 package net.merchantpug.krendershowcase.client.model.baked;
 
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
 import com.kneelawk.krender.engine.api.KRenderer;
 import com.kneelawk.krender.engine.api.TriState;
 import com.kneelawk.krender.engine.api.buffer.QuadEmitter;
@@ -20,16 +22,21 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.UnknownNullability;
 
 import java.util.Map;
 import java.util.WeakHashMap;
+import java.util.concurrent.TimeUnit;
 
 public class MiniBlockBakedModel implements BakedModelCore<Void> {
     private static final RenderMaterial GLOW_MATERIAL =
             KRenderer.getDefault().materialManager().materialFinder().setBlendMode(BlendMode.CUTOUT).setEmissive(true)
                     .setDiffuseDisabled(true).setAmbientOcclusionMode(TriState.FALSE).find();
-    private final Map<BlockState, Mesh> meshes = new WeakHashMap<>(64);
+    private final Cache<BlockState, Mesh> meshes = CacheBuilder.newBuilder()
+            .maximumSize(256)
+            .expireAfterAccess(5, TimeUnit.MINUTES)
+            .build();
 
     @Override
     public boolean useAmbientOcclusion() {
@@ -52,17 +59,17 @@ public class MiniBlockBakedModel implements BakedModelCore<Void> {
     }
 
     @Override
-    public TextureAtlasSprite getParticleIcon() {
+    public @NotNull TextureAtlasSprite getParticleIcon() {
         return Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(ResourceLocation.withDefaultNamespace("block/iron_block"));
     }
 
     @Override
-    public ItemTransforms getTransforms() {
+    public @NotNull ItemTransforms getTransforms() {
         return ModelUtils.BLOCK_DISPLAY;
     }
 
     @Override
-    public ItemOverrides getOverrides() {
+    public @NotNull ItemOverrides getOverrides() {
         return ItemOverrides.EMPTY;
     }
 
@@ -77,12 +84,13 @@ public class MiniBlockBakedModel implements BakedModelCore<Void> {
     }
 
     @Override
+    @SuppressWarnings("ConstantConditions")
     public void renderItem(QuadEmitter renderTo, ModelItemContext ctx) {
         if (ctx.stack().getComponents().has(ShowcaseDataComponents.BLOCK_STATE)) {
             BlockState state = ctx.stack().getComponents().get(ShowcaseDataComponents.BLOCK_STATE);
-            if (!meshes.containsKey(state))
+            if (!meshes.asMap().containsKey(state))
                 meshes.put(state, buildMesh(state));
-            meshes.get(state).outputTo(renderTo);
+            meshes.asMap().get(state).outputTo(renderTo);
         }
     }
 

@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.*;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.Map;
@@ -32,7 +33,7 @@ public record CharacterUnbakedModel(Map<ResourceKey<CharacterData>, CharacterMod
     ).apply(inst, Pair::of));
 
     @Override
-    public Collection<ResourceLocation> getDependencies() {
+    public @NotNull Collection<ResourceLocation> getDependencies() {
         return models.values().stream().flatMap(data -> Stream.of(data.top(), data.bottom())).toList();
     }
 
@@ -63,6 +64,7 @@ public record CharacterUnbakedModel(Map<ResourceKey<CharacterData>, CharacterMod
                 }).collect(Collectors.toMap(Pair::getFirst, Pair::getSecond))));
     }
 
+    @SuppressWarnings("unchecked")
     private static BakedModelCore<Object> bakeModelWithDependencies(UnbakedModel model, ModelBaker baker, Function<Material, TextureAtlasSprite> spriteGetter, ModelState state) {
         model.resolveParents(baker::getModel);
         BakedModel bakedModel = model.bake(baker, spriteGetter, state);

@@ -15,6 +15,7 @@ import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.UnknownNullability;
 
@@ -42,17 +43,18 @@ public record CharacterBakedModel(Map<ResourceKey<CharacterData>, CharacterModel
     }
 
     @Override
-    public TextureAtlasSprite getParticleIcon() {
+    @SuppressWarnings("deprecation")
+    public @NotNull TextureAtlasSprite getParticleIcon() {
         return Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(KRenderShowcase.asResource("item/character"));
     }
 
     @Override
-    public ItemTransforms getTransforms() {
+    public @NotNull ItemTransforms getTransforms() {
         return ModelUtils.BLOCK_DISPLAY;
     }
 
     @Override
-    public ItemOverrides getOverrides() {
+    public @NotNull ItemOverrides getOverrides() {
         return ItemOverrides.EMPTY;
     }
 

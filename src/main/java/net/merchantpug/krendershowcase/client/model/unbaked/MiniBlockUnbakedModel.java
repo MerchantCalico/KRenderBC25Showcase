@@ -5,6 +5,7 @@ import net.merchantpug.krendershowcase.client.model.baked.MiniBlockBakedModel;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.*;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
@@ -13,7 +14,7 @@ import java.util.function.Function;
 
 public class MiniBlockUnbakedModel implements UnbakedModel {
     @Override
-    public Collection<ResourceLocation> getDependencies() {
+    public @NotNull Collection<ResourceLocation> getDependencies() {
         return List.of();
     }
 

@@ -15,12 +15,4 @@ public class ShowcaseBlockEntityTypes {
             BlockEntityType.Builder.of(CharacterBlockEntity::new, ShowcaseBlocks.CHARACTER).build(null));
 
     public static void registerAll() {}
-
-    private static boolean never(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
-        return false;
-    }
-
-    private static boolean never(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, EntityType<?> entityType) {
-        return false;
-    }
 }
