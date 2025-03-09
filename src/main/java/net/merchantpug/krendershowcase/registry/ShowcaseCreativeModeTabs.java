@@ -20,6 +20,7 @@ public class ShowcaseCreativeModeTabs {
                         output.accept(ShowcaseItems.SMALL_SUZANNE);
                         output.accept(ShowcaseItems.SUZANNE);
                         output.accept(ShowcaseItems.LARGE_SUZANNE);
+                        output.accept(ShowcaseItems.TEAPOT);
                     })
                     .icon(() -> new ItemStack(ShowcaseItems.CHARACTER))
                     .build()

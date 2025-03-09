@@ -21,6 +21,10 @@ public class ShowcaseBlocks {
     public static final Block DISCO_FLOOR = Registry.register(BuiltInRegistries.BLOCK, KRenderShowcase.asResource("disco_floor"),
             new Block(BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.DRAGON).strength(0.3F).sound(SoundType.GLASS)
                     .isValidSpawn(ShowcaseBlocks::never).isSuffocating(ShowcaseBlocks::never)));
+
+    public static final Block TEAPOT = Registry.register(BuiltInRegistries.BLOCK, KRenderShowcase.asResource("teapot"),
+            new ShowcaseBlock(BlockBehaviour.Properties.of().noOcclusion()));
+
     public static final Block SMALL_SUZANNE = Registry.register(BuiltInRegistries.BLOCK, KRenderShowcase.asResource("small_suzanne"),
             new ShowcaseBlock(BlockBehaviour.Properties.of().noOcclusion()));
     public static final Block SUZANNE = Registry.register(BuiltInRegistries.BLOCK, KRenderShowcase.asResource("suzanne"),

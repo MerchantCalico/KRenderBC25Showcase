@@ -44,6 +44,8 @@ dependencies {
 	include("com.kneelawk.krender:krender-model-guard-fabric:${Versions.KRENDER}")
 	modImplementation("com.kneelawk.krender:krender-model-gltf-fabric:${Versions.KRENDER}")
 	include("com.kneelawk.krender:krender-model-gltf-fabric:${Versions.KRENDER}")
+	modImplementation("com.kneelawk.krender:krender-model-obj-fabric:${Versions.KRENDER}")
+	include("com.kneelawk.krender:krender-model-obj-fabric:${Versions.KRENDER}")
 }
 
 tasks {

@@ -1,0 +1,5 @@
+{
+    "krender:gltf": {
+        "useAmbientOcclusion": false
+    }
+}

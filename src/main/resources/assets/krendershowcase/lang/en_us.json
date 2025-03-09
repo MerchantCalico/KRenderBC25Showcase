@@ -1,9 +1,12 @@
 {
   "block.krendershowcase.character": "Character",
   "block.krendershowcase.disco_floor": "Disco Floor",
+
   "block.krendershowcase.small_suzanne": "Small Suzanne",
   "block.krendershowcase.suzanne": "Suzanne",
   "block.krendershowcase.large_suzanne": "Large Suzanne",
+
+  "block.krendershowcase.teapot": "Teapot",
 
   "item.krendershowcase.mini_block": "Mini Block",
   "item.krendershowcase.mini_block.tooltip": "Usable on a full-sized block to swap the texture",
