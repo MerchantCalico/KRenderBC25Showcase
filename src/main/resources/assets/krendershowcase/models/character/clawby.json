@@ -1,0 +1,7 @@
+{
+  "character": "krendershowcase:clawby",
+  "models": {
+    "top": "krendershowcase:block/clawby_top",
+    "bottom": "krendershowcase:block/clawby_bottom"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "character": "krendershowcase:ashley_vivian",
+  "models": {
+    "top": "krendershowcase:block/ashley_vivian_top",
+    "bottom": "krendershowcase:block/ashley_vivian_bottom"
+  }
+}

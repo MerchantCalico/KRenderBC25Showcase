@@ -1,0 +1,7 @@
+{
+  "character": "krendershowcase:topaz",
+  "models": {
+    "top": "krendershowcase:block/topaz_top",
+    "bottom": "krendershowcase:block/topaz_bottom"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "character": "krendershowcase:kapesi",
+  "models": {
+    "top": "krendershowcase:block/kapesi_top",
+    "bottom": "krendershowcase:block/kapesi_bottom"
+  }
+}

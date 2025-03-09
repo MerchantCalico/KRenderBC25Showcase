@@ -1,0 +1,7 @@
+{
+  "character": "krendershowcase:marina",
+  "models": {
+    "top": "krendershowcase:block/marina_top",
+    "bottom": "krendershowcase:block/marina_bottom"
+  }
+}

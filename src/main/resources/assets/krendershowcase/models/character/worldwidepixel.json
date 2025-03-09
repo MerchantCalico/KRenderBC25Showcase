@@ -1,0 +1,7 @@
+{
+  "character": "krendershowcase:worldwidepixel",
+  "models": {
+    "top": "krendershowcase:block/worldwidepixel_top",
+    "bottom": "krendershowcase:block/worldwidepixel_bottom"
+  }
+}
