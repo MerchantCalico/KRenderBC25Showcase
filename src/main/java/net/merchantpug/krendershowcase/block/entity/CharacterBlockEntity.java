@@ -12,6 +12,7 @@ import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -30,7 +31,14 @@ public class CharacterBlockEntity extends BlockEntity {
         return data;
     }
 
-    public static void tick(Level level, BlockPos pos, BlockState state, CharacterBlockEntity blockEntity) {
+    public void use(Player player) {
+        if (!player.level().isClientSide)
+            return;
+        for (var descriptionValue : getCharacterData().value().description())
+            player.sendSystemMessage(descriptionValue);
+    }
+
+    public static void serverTick(Level level, BlockPos pos, BlockState state, CharacterBlockEntity blockEntity) {
         if (state.getValue(CharacterBlock.HALF) == DoubleBlockHalf.LOWER && (blockEntity.data == null || level.getGameTime() % 120 == 0)) {
             var validData = level.registryAccess().registry(KRenderShowcase.CHARACTER).orElseThrow().holders().filter(characterData -> characterData != blockEntity.data).toList();
             var newData = validData.get(level.getRandom().nextInt(validData.size()));

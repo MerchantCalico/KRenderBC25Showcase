@@ -12,7 +12,7 @@ import java.util.List;
 
 public record CharacterData(List<Component> description) {
     public static final Codec<CharacterData> DIRECT_CODEC = RecordCodecBuilder.create(inst -> inst.group(
-            ComponentSerialization.CODEC.listOf().fieldOf("description").forGetter(CharacterData::description)
+            ComponentSerialization.CODEC.listOf().optionalFieldOf("description", List.of()).forGetter(CharacterData::description)
     ).apply(inst, CharacterData::new));
     public static final Codec<Holder<CharacterData>> CODEC = RegistryFixedCodec.create(KRenderShowcase.CHARACTER);
 }

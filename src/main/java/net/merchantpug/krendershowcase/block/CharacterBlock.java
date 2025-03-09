@@ -1,13 +1,14 @@
 package net.merchantpug.krendershowcase.block;
 
 import com.mojang.serialization.MapCodec;
-import it.unimi.dsi.fastutil.doubles.DoubleBigList;
 import net.merchantpug.krendershowcase.block.entity.CharacterBlockEntity;
 import net.merchantpug.krendershowcase.registry.ShowcaseBlockEntityTypes;
 import net.merchantpug.krendershowcase.registry.ShowcaseBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -21,6 +22,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -35,6 +37,15 @@ public class CharacterBlock extends BaseEntityBlock {
     public CharacterBlock(Properties properties) {
         super(properties);
         registerDefaultState(getStateDefinition().any().setValue(AXIS, Direction.Axis.X).setValue(HALF, DoubleBlockHalf.LOWER));
+    }
+
+    @Override
+    public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+        if (level.getBlockEntity(pos) instanceof CharacterBlockEntity blockEntity) {
+            blockEntity.use(player);
+            return InteractionResult.sidedSuccess(level.isClientSide);
+        }
+        return InteractionResult.PASS;
     }
 
     @Override
@@ -100,6 +111,6 @@ public class CharacterBlock extends BaseEntityBlock {
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntity) {
         if (level.isClientSide())
             return null;
-        return createTickerHelper(blockEntity, ShowcaseBlockEntityTypes.CHARACTER, CharacterBlockEntity::tick);
+        return createTickerHelper(blockEntity, ShowcaseBlockEntityTypes.CHARACTER, CharacterBlockEntity::serverTick);
     }
 }
