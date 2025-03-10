@@ -1,0 +1,7 @@
+{
+  "character": "krendershowcase:proxy",
+  "models": {
+    "top": "krendershowcase:block/proxy_top",
+    "bottom": "krendershowcase:block/proxy_bottom"
+  }
+}

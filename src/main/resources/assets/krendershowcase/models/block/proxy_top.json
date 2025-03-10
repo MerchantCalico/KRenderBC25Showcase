@@ -1,6 +1,6 @@
 {
 	"parent": "krendershowcase:block/character_top",
 	"textures": {
-		"sprite": "krendershowcase:block/hama"
+		"sprite": "krendershowcase:block/proxy"
 	}
 }
