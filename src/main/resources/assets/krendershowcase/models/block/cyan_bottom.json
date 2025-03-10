@@ -1,0 +1,6 @@
+{
+	"parent": "krendershowcase:block/character_bottom",
+	"textures": {
+		"sprite": "krendershowcase:block/cyan"
+	}
+}

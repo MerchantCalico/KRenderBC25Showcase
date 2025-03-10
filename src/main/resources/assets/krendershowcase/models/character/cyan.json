@@ -1,0 +1,7 @@
+{
+  "character": "krendershowcase:cyan",
+  "models": {
+    "top": "krendershowcase:block/cyan_top",
+    "bottom": "krendershowcase:block/cyan_bottom"
+  }
+}

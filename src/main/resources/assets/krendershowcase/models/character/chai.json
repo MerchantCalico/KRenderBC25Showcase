@@ -1,0 +1,7 @@
+{
+  "character": "krendershowcase:chai",
+  "models": {
+    "top": "krendershowcase:block/chai_top",
+    "bottom": "krendershowcase:block/chai_bottom"
+  }
+}
