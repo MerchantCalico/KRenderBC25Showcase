@@ -1,9 +1,10 @@
-# Fabric Example Mod
+# KRender Blanketcon '25 Showcase
+This mod is an example mod for [KRender](https://github.com/Kneelawk/KRender) created by [Kneelawk (Cyan)](https://github.com/Kneelawk).
+This only has a Fabric project, as Blanketcon '25 runs on Fabric, but KRender is a multiplatform rendering library available for both 1.21.1 and 1.21.4 (as of writing).
 
-## Setup
+It includes showcase ready examples for functionalities of the library, such as...
 
-For setup instructions please see the [fabric documentation page](https://docs.fabricmc.net/develop/getting-started/setting-up-a-development-environment) that relates to the IDE that you are using.
-
-## License
-
-This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
+Model Loading - Showcased by the Disco Floor block.
+Contextual Block/Item Models - Showcased by the Disco Floor block/item, Character block, and Mini Block item.
+OBJ models - Showcased by the Teapot block/item.
+GLTF models - Showcased by the Suzanne models.
