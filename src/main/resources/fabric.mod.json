@@ -26,6 +26,9 @@
 			"net.merchantpug.krendershowcase.client.KRenderShowcaseClient"
 		]
 	},
+	"mixins": [
+		"${mod_id}.mixins.json"
+	],
 	"depends": {
 		"fabricloader": "${fabric_loader_range}",
 		"fabric-api": "*",

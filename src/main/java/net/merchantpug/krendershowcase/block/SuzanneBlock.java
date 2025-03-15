@@ -2,6 +2,7 @@ package net.merchantpug.krendershowcase.block;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -17,6 +18,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public class SuzanneBlock extends HorizontalDirectionalBlock {
     public SuzanneBlock(Properties properties) {
         super(properties);
+        defaultBlockState().setValue(FACING, Direction.NORTH);
     }
 
     @Override

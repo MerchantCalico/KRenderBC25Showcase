@@ -4,6 +4,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.kneelawk.krender.model.guard.api.ModelGuards;
 import com.kneelawk.krender.model.loading.api.ModelBakeryPlugin;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import com.mojang.serialization.JsonOps;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.fabricmc.api.ClientModInitializer;
@@ -15,10 +17,12 @@ import net.merchantpug.krendershowcase.client.model.unbaked.CharacterUnbakedMode
 import net.merchantpug.krendershowcase.client.model.unbaked.DiscoFloorUnbakedModel;
 import net.merchantpug.krendershowcase.data.CharacterData;
 import net.merchantpug.krendershowcase.registry.ShowcaseBlocks;
+import net.merchantpug.krendershowcase.registry.ShowcaseItems;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
+import net.minecraft.world.item.Item;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -58,5 +62,14 @@ public class KRenderShowcaseClient implements ClientModInitializer {
 
 		BlockRenderLayerMap.INSTANCE.putBlock(ShowcaseBlocks.CHARACTER, RenderType.cutout());
 		BlockRenderLayerMap.INSTANCE.putBlock(ShowcaseBlocks.SUZANNE, RenderType.cutout());
+	}
+
+	public static void transformSuzanneModelOnHead(Item item, PoseStack poseStack) {
+		if (item == ShowcaseItems.SMALL_SUZANNE)
+			poseStack.translate(0.0, 0.5, 0.0);
+		poseStack.translate(0.0, -0.2, 0.0);
+		poseStack.mulPose(Axis.XN.rotationDegrees(30));
+		poseStack.mulPose(Axis.YP.rotationDegrees(50));
+		poseStack.scale(1.5F, 1.5F, 1.5F);
 	}
 }
