@@ -10,5 +10,4 @@ object Properties {
     const val LICENSE = "MIT"
 
     const val GITHUB_REPO = "MerchantPug/KRenderBC25Showcase"
-    const val GITHUB_COMMITISH = "1.21"
 }

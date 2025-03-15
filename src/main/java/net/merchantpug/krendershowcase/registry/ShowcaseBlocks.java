@@ -2,7 +2,8 @@ package net.merchantpug.krendershowcase.registry;
 
 import net.merchantpug.krendershowcase.KRenderShowcase;
 import net.merchantpug.krendershowcase.block.CharacterBlock;
-import net.merchantpug.krendershowcase.block.ShowcaseBlock;
+import net.merchantpug.krendershowcase.block.SuzanneBlock;
+import net.merchantpug.krendershowcase.block.TeapotBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -23,14 +24,18 @@ public class ShowcaseBlocks {
                     .isValidSpawn(ShowcaseBlocks::never).isSuffocating(ShowcaseBlocks::never)));
 
     public static final Block TEAPOT = Registry.register(BuiltInRegistries.BLOCK, KRenderShowcase.asResource("teapot"),
-            new ShowcaseBlock(BlockBehaviour.Properties.of().noOcclusion()));
+            new TeapotBlock(BlockBehaviour.Properties.of().noOcclusion()
+                    .isValidSpawn(ShowcaseBlocks::never)));
 
     public static final Block SMALL_SUZANNE = Registry.register(BuiltInRegistries.BLOCK, KRenderShowcase.asResource("small_suzanne"),
-            new ShowcaseBlock(BlockBehaviour.Properties.of().noOcclusion()));
+            new SuzanneBlock(BlockBehaviour.Properties.of().noOcclusion()
+                    .isValidSpawn(ShowcaseBlocks::never).isSuffocating(ShowcaseBlocks::never)));
     public static final Block SUZANNE = Registry.register(BuiltInRegistries.BLOCK, KRenderShowcase.asResource("suzanne"),
-            new ShowcaseBlock(BlockBehaviour.Properties.of().noOcclusion()));
+            new SuzanneBlock(BlockBehaviour.Properties.of().noOcclusion()
+                    .isValidSpawn(ShowcaseBlocks::never).isSuffocating(ShowcaseBlocks::never)));
     public static final Block LARGE_SUZANNE = Registry.register(BuiltInRegistries.BLOCK, KRenderShowcase.asResource("large_suzanne"),
-            new ShowcaseBlock(BlockBehaviour.Properties.of().noOcclusion()));
+            new SuzanneBlock(BlockBehaviour.Properties.of().noOcclusion()
+                    .isValidSpawn(ShowcaseBlocks::never).isSuffocating(ShowcaseBlocks::never)));
 
     public static void registerAll() {}
 

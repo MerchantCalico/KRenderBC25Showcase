@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=east": {
+      "model": "krendershowcase:block/suzanne",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "krendershowcase:block/suzanne",
+      "y": 180
+    },
+    "facing=south": {
       "model": "krendershowcase:block/suzanne"
+    },
+    "facing=west": {
+      "model": "krendershowcase:block/suzanne",
+      "y": 90
     }
   }
 }

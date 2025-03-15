@@ -1,7 +1,7 @@
 package net.merchantpug.krendershowcase.gradle
 
 object Versions {
-    const val MOD = "1.0.0"
+    const val MOD = "1.0.1"
 
     const val MINECRAFT = "1.21.1"
     const val PARCHMENT = "2024.11.17"
@@ -12,7 +12,7 @@ object Versions {
     const val FABRIC_LOADER_RANGE = ">=0.16"
     const val FABRIC_MINECRAFT_RANGE = ">=1.21 <=1.21.1"
 
-    const val KRENDER = "0.1.2+1.21.1"
+    const val KRENDER = "0.1.3+1.21.1"
 
     const val JAVA = 21
 }
