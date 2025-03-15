@@ -1,7 +1,7 @@
 package net.merchantpug.krendershowcase.gradle
 
 object Versions {
-    const val MOD = "1.0.2"
+    const val MOD = "1.0.1"
 
     const val MINECRAFT = "1.21.1"
     const val PARCHMENT = "2024.11.17"
