@@ -1,19 +1,19 @@
 {
   "variants": {
     "facing=east": {
-      "model": "krendershowcase:block/teapot",
-      "y": 180
+      "model": "krendershowcase:block/teapot"
     },
     "facing=north": {
       "model": "krendershowcase:block/teapot",
-      "y": 90
+      "y": 270
     },
     "facing=south": {
       "model": "krendershowcase:block/teapot",
-      "y": 270
+      "y": 90
     },
     "facing=west": {
-      "model": "krendershowcase:block/teapot"
+      "model": "krendershowcase:block/teapot",
+      "y": 180
     }
   }
 }
