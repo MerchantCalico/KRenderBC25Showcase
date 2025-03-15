@@ -32,7 +32,7 @@ public class CharacterBlockEntity extends BlockEntity {
     }
 
     public void use(Player player) {
-        if (!player.level().isClientSide)
+        if (!player.level().isClientSide || getCharacterData() == null)
             return;
         for (var descriptionValue : getCharacterData().value().description())
             player.sendSystemMessage(descriptionValue);
