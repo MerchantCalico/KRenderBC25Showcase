@@ -1,4 +1,4 @@
-package buildSrc.src.main.kotlin.net.merchantpug.krendershowcase.gradle
+package net.merchantpug.krendershowcase.gradle
 
 object Properties {
     const val GROUP = "net.merchantpug"

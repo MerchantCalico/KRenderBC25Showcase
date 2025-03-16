@@ -1,4 +1,4 @@
-import buildSrc.src.main.kotlin.net.merchantpug.krendershowcase.gradle.Properties
+import net.merchantpug.krendershowcase.gradle.Properties
 import net.merchantpug.krendershowcase.gradle.Versions
 
 plugins {
