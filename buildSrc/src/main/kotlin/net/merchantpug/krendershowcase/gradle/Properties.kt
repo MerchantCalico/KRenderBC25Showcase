@@ -6,7 +6,7 @@ object Properties {
     const val MOD_ID = "krendershowcase"
     const val MOD_AUTHOR = "Kneelawk"
     val MOD_CONTRIBUTORS = listOf("MerchantPug")
-    const val DESCRIPTION = "A lightweight enchantment overhaul that categorises enchantments to be mutually exclusive."
+    const val DESCRIPTION = "A showcase of KRender's features for BlanketCon '25."
     const val LICENSE = "MIT"
 
     const val GITHUB_REPO = "MerchantPug/KRenderBC25Showcase"
