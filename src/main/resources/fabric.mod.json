@@ -20,10 +20,10 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"net.merchantpug.krendershowcase.KRenderShowcase"
+          "net.merchantcalico.krendershowcase.KRenderShowcase"
 		],
 		"client": [
-			"net.merchantpug.krendershowcase.client.KRenderShowcaseClient"
+          "net.merchantcalico.krendershowcase.client.KRenderShowcaseClient"
 		]
 	},
 	"mixins": [

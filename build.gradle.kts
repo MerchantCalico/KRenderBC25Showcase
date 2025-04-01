@@ -1,5 +1,5 @@
-import net.merchantpug.krendershowcase.gradle.Properties
-import net.merchantpug.krendershowcase.gradle.Versions
+import net.merchantcalico.krendershowcase.gradle.Properties
+import net.merchantcalico.krendershowcase.gradle.Versions
 
 plugins {
 	id("fabric-loom") version("1.10-SNAPSHOT")
