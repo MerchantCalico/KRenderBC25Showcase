@@ -2,7 +2,6 @@ package net.merchantcalico.krendershowcase.client.model.baked;
 
 import com.kneelawk.krender.engine.api.buffer.QuadEmitter;
 import com.kneelawk.krender.engine.api.model.*;
-import com.mojang.datafixers.util.Pair;
 import net.merchantcalico.krendershowcase.KRenderShowcase;
 import net.merchantcalico.krendershowcase.block.CharacterBlock;
 import net.merchantcalico.krendershowcase.block.entity.CharacterBlockEntity;
@@ -16,12 +15,11 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.UnknownNullability;
 
 import java.util.Map;
 
-public record CharacterBakedModel(Map<ResourceKey<CharacterData>, CharacterModelData<BakedModelCore<Object>>> models) implements BakedModelCore<Pair<BakedModelCore<Object>, Object>> {
+public record CharacterBakedModel(Map<ResourceKey<CharacterData>, CharacterModelData<BakedModelCore<Object>>> models) implements BakedModelCore<CharacterBakedModel.Data<Object>> {
     @Override
     public boolean useAmbientOcclusion() {
         return false;
@@ -59,8 +57,7 @@ public record CharacterBakedModel(Map<ResourceKey<CharacterData>, CharacterModel
     }
 
     @Override
-    @Nullable
-    public Pair<BakedModelCore<Object>, Object> getBlockKey(ModelBlockContext modelBlockContext) {
+    public @UnknownNullability Data<Object> getBlockKey(ModelBlockContext modelBlockContext) {
         if (modelBlockContext.level().getBlockEntity(modelBlockContext.pos()) instanceof CharacterBlockEntity characterBlockEntity) {
             if (characterBlockEntity.getCharacterData() == null)
                 return null;
@@ -68,20 +65,22 @@ public record CharacterBakedModel(Map<ResourceKey<CharacterData>, CharacterModel
             if (data == null)
                 return null;
             if (modelBlockContext.state().getValue(CharacterBlock.HALF) == DoubleBlockHalf.UPPER)
-                return Pair.of(data.top(), data.top().getBlockKey(modelBlockContext));
-            return Pair.of(data.bottom(), data.bottom().getBlockKey(modelBlockContext));
+                return new Data<>(data.top(), data.top().getBlockKey(modelBlockContext));
+            return new Data<>(data.bottom(), data.bottom().getBlockKey(modelBlockContext));
         }
         return null;
     }
 
     @Override
-    public void renderBlock(QuadEmitter quadEmitter, @UnknownNullability Pair<BakedModelCore<Object>, Object> pair) {
+    public void renderBlock(QuadEmitter quadEmitter, @UnknownNullability Data<Object> pair) {
         if (pair != null)
-            pair.getFirst().renderBlock(quadEmitter, pair.getSecond());
+            pair.model().renderBlock(quadEmitter, pair.blockKey());
     }
 
     @Override
     public void renderItem(QuadEmitter quadEmitter, ModelItemContext modelItemContext) {
 
     }
+
+    public record Data<BK>(BakedModelCore<BK> model, BK blockKey) {}
 }

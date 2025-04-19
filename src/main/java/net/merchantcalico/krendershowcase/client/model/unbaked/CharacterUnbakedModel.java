@@ -64,7 +64,7 @@ public record CharacterUnbakedModel(Map<ResourceKey<CharacterData>, CharacterMod
                 }).collect(Collectors.toMap(Pair::getFirst, Pair::getSecond))));
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "OverrideOnly"})
     private static BakedModelCore<Object> bakeModelWithDependencies(UnbakedModel model, ModelBaker baker, Function<Material, TextureAtlasSprite> spriteGetter, ModelState state) {
         model.resolveParents(baker::getModel);
         BakedModel bakedModel = model.bake(baker, spriteGetter, state);
